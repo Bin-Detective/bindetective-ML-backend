@@ -97,7 +97,7 @@ jobs:
             --memory=1024Mi
             --min-instances=0
             --max-instances=1
-            --set-env-vars=MODEL_ARCHIVE_PATH=${{ env.MODEL_ARCHIVE_PATH_ENV }}
+            --set-env-vars MODEL_ARCHIVE_PATH=${{ env.MODEL_ARCHIVE_PATH }}
             --port=50051
       
       # Grant calling Cloud Run instance access
