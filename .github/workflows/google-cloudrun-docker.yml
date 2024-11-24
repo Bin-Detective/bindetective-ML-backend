@@ -85,16 +85,15 @@ jobs:
           docker build --tag "${DOCKER_TAG}" .
           docker push "${DOCKER_TAG}"
           
-      # Deploy to Cloud Run
       - name: 'Deploy to Cloud Run'
         uses: 'google-github-actions/deploy-cloudrun@v2'
         with:
           service: '${{ env.SERVICE }}'
-          region: '${{ env.REGION }}'
-          image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/bin-detective-grpc-service/bin-detective-grpc-service:${{ github.sha }}'
+          region: 'asia-southeast2'
+          image: 'asia-southeast2-docker.pkg.dev/dicoding-submission-440805/bin-detective-grpc-service/bin-detective-grpc-service:${{ github.sha }}'
           flags: >-
-            --cpu=2
-            --memory=1024Mi
+            --cpu=4
+            --memory=2048Mi
             --min-instances=0
             --max-instances=1
             --set-env-vars MODEL_ARCHIVE_PATH=${{ env.MODEL_ARCHIVE_PATH }}
