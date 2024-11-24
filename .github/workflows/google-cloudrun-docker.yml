@@ -99,7 +99,6 @@ jobs:
             --max-instances=1
             --set-env-vars=MODEL_ARCHIVE_PATH=${{ env.MODEL_ARCHIVE_PATH_ENV }}
             --port=50051
-            --no-allow-unauthenticated # Restrict access
       
       # Grant calling Cloud Run instance access
       - name: 'Grant invoker role to calling service'
