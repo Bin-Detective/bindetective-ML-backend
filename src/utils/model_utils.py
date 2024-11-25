@@ -1,13 +1,9 @@
 import os
-import shutil
 import requests
 import tarfile
 from config import Config
 
-def download_and_extract_model():
-    # Define the URL for the model download
-    model_url = f"{Config.MODEL_ARCHIVE_PATH}"
-
+def download_and_extract_model(model_archive_path):
     # Define the path to save the downloaded archive
     archive_copy_path = os.path.join(Config.EXTRACTED_MODEL_DIR, 'model_archive.tar.gz')
 
@@ -15,7 +11,7 @@ def download_and_extract_model():
     os.makedirs(Config.EXTRACTED_MODEL_DIR, exist_ok=True)
 
     # Download the model using requests
-    with requests.get(model_url, stream=True) as r:
+    with requests.get(model_archive_path, stream=True) as r:
         r.raise_for_status()
         with open(archive_copy_path, 'wb') as f:
             for chunk in r.iter_content(chunk_size=8192):
