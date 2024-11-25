@@ -20,7 +20,7 @@ COPY . .
 RUN python -m grpc_tools.protoc -I=protos --python_out=. --grpc_python_out=. protos/waste_prediction.proto
 
 # Expose port 50051 for the gRPC server
-EXPOSE 50051
+EXPOSE 443
 
 # Run the application
 CMD ["python", "app.py"]
