@@ -35,7 +35,7 @@ class WastePredictionServicer:
         try:
             # Load image from binary data
             image = Image.open(io.BytesIO(image_bytes)).resize((224, 224))
-            image_array = np.expand_dims(np.array(image) / 255.0, axis=0)  # Normalize
+            image_array = np.expand_dims(np.array(image, dtype=np.uint8), axis=0)
 
             # Run the prediction
             prediction = model.predict(image_array)
