@@ -10,11 +10,12 @@ load_model_from_dir()
 # Initialize FastAPI app
 app = FastAPI()
 
-# Define a route for prediction
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     try:
         image_bytes = await file.read()
+        # Assuming WastePredictionServicer is defined elsewhere and has a predict method
         servicer = WastePredictionServicer()
         prediction = servicer.predict(image_bytes)
         return prediction
