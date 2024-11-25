@@ -38,7 +38,7 @@ env:
   SERVICE: 'bin-detective-ml' 
   SERVICE_ACCOUNT: 'bindetective@dicoding-submission-440805.iam.gserviceaccount.com' # Service account for Cloud Run
   CALLER_SERVICE_ACCOUNT: 'bindetective@dicoding-submission-440805.iam.gserviceaccount.com'
-  MODEL_ARCHIVE_PATH: 'https://www.kaggle.com/api/v1/models/bahiskaraananda/robin-resnet50/tensorFlow2/1.1-23m/1/download'
+  MODEL_ARCHIVE_PATH: 'https://www.kaggle.com/api/v1/models/bahiskaraananda/robin-efficientnetv2s/tensorFlow2/1.0-18m-ft144/1/download'
 
 jobs:
   deploy:
