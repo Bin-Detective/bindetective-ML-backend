@@ -97,7 +97,7 @@ jobs:
             --min-instances=0
             --max-instances=1
             --set-env-vars MODEL_ARCHIVE_PATH=${{ env.MODEL_ARCHIVE_PATH }}
-            --port=443
+            --port=7976
       
       # Grant calling Cloud Run instance access
       - name: 'Grant invoker role to calling service'
