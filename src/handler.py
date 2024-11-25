@@ -2,8 +2,7 @@ import io
 from PIL import Image
 import numpy as np
 from tensorflow.keras.models import load_model
-import waste_prediction_pb2 as waste_prediction_pb2
-import waste_prediction_pb2_grpc as waste_prediction_pb2_grpc
+from fastapi import HTTPException
 from config import Config
 
 ORGANIK = "organik"
@@ -31,12 +30,11 @@ def load_model_from_dir():
     global model
     model = load_model(Config.EXTRACTED_MODEL_DIR)
 
-# Implement the gRPC service
-class WastePredictionServicer(waste_prediction_pb2_grpc.WastePredictionServicer):
-    def PredictImage(self, request, context):
+class WastePredictionServicer:
+    def predict(self, image_bytes: bytes):
         try:
             # Load image from binary data
-            image = Image.open(io.BytesIO(request.image)).resize((224, 224))
+            image = Image.open(io.BytesIO(image_bytes)).resize((224, 224))
             image_array = np.expand_dims(np.array(image) / 255.0, axis=0)  # Normalize
 
             # Run the prediction
@@ -46,15 +44,13 @@ class WastePredictionServicer(waste_prediction_pb2_grpc.WastePredictionServicer)
             waste_type = class_labels_with_types[predicted_class]
 
             # Prepare the response
-            response = waste_prediction_pb2.PredictResponse(
-                predicted_class=predicted_class,
-                waste_type=waste_type,
-                probabilities={
+            response = {
+                "predicted_class": predicted_class,
+                "waste_type": waste_type,
+                "probabilities": {
                     class_labels[i]: float(prob) for i, prob in enumerate(prediction[0])
                 }
-            )
+            }
             return response
         except Exception as e:
-            context.set_details(f"Error processing image: {str(e)}")
-            context.set_code(grpc.StatusCode.INTERNAL)
-            return waste_prediction_pb2.PredictResponse()
+            raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
