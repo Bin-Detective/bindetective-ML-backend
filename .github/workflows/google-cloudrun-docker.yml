@@ -35,7 +35,7 @@ on:
 env:
   PROJECT_ID: 'dicoding-submission-440805' 
   REGION: 'asia-southeast2' 
-  SERVICE: 'bin-detective-ml-grpc' 
+  SERVICE: 'bin-detective-ml' 
   SERVICE_ACCOUNT: 'bindetective@dicoding-submission-440805.iam.gserviceaccount.com' # Service account for Cloud Run
   CALLER_SERVICE_ACCOUNT: 'bindetective@dicoding-submission-440805.iam.gserviceaccount.com'
   MODEL_ARCHIVE_PATH: 'https://www.kaggle.com/api/v1/models/bahiskaraananda/robin-resnet50/tensorFlow2/1.1-23m/1/download'
@@ -81,7 +81,7 @@ jobs:
 
       - name: 'Build and Push Container'
         run: |-
-          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/bin-detective-grpc-service/bin-detective-grpc-service:${{ github.sha }}"
+          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/bin-detective-grpc-service/bin-detective-service:${{ github.sha }}"
           docker build --tag "${DOCKER_TAG}" .
           docker push "${DOCKER_TAG}"
           
@@ -90,7 +90,7 @@ jobs:
         with:
           service: '${{ env.SERVICE }}'
           region: 'asia-southeast2'
-          image: 'asia-southeast2-docker.pkg.dev/dicoding-submission-440805/bin-detective-grpc-service/bin-detective-grpc-service:${{ github.sha }}'
+          image: 'asia-southeast2-docker.pkg.dev/dicoding-submission-440805/bin-detective-grpc-service/bin-detective-service:${{ github.sha }}'
           flags: >-
             --cpu=4
             --memory=2048Mi
