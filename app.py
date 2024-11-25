@@ -16,7 +16,7 @@ load_model_from_dir()
 
 # Start the gRPC server
 def serve():
-    port = os.getenv('PORT', '50051')
+    port = os.getenv('PORT', '443')
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     waste_prediction_pb2_grpc.add_WastePredictionServicer_to_server(
         WastePredictionServicer(), server
