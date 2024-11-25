@@ -22,7 +22,7 @@ def serve():
         WastePredictionServicer(), server
     )
     server.add_insecure_port(f"[::]:{port}")
-    print("gRPC server is running on port 50051")
+    print("gRPC server is running on port 443")
     server.start()
     server.wait_for_termination()
 
