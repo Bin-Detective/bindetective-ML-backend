@@ -6,11 +6,6 @@ import src.utils.model_utils as model_utils
 import waste_prediction_pb2_grpc as waste_prediction_pb2_grpc
 from src.grpc_handler import WastePredictionServicer, load_model_from_dir
 
-# Check if the model directory exists
-if not os.path.exists(Config.EXTRACTED_MODEL_DIR):
-    # Download and extract the model
-    model_utils.download_and_extract_model()
-
 # Load the model
 load_model_from_dir()
 
@@ -22,7 +17,7 @@ def serve():
         WastePredictionServicer(), server
     )
     server.add_insecure_port(f"[::]:{port}")
-    print("gRPC server is running on port 443")
+    print(f"gRPC server is running on port {port}")
     server.start()
     server.wait_for_termination()
 
