@@ -129,14 +129,12 @@ cython_debug/
 
 # Generated gRPC files
 src/generated/*
-waste_prediction_pb2_grpc.py
-waste_prediction_pb2.py
 
 # Kaggle API credentials
 kaggle.json
 
 # Model dir
-model_dir
+/model_dir
 
 # Debugging tools directory
 test
