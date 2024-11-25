@@ -16,9 +16,6 @@ RUN pip install grpcio-tools
 # Copy the current directory contents into the container at /app
 COPY . .
 
-# Generate gRPC files with relative imports
-RUN python -m grpc_tools.protoc -I=protos --python_out=. --grpc_python_out=. protos/waste_prediction.proto
-
 # Expose port 50051 for the gRPC server
 EXPOSE 443
 
