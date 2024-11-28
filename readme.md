@@ -15,9 +15,9 @@ project_root/
 │   └── handler.py
 │
 ├── .env
-├── [config.py](http://_vscodecontentref_/1)
-├── [requirements.txt](http://_vscodecontentref_/2)
+├── config.py Set static environment variables here
+├── requirements.txt] Package dependencies, Use Python 3.10
 ├── Dockerfile
 ├── .gitignore
-└── [app.py](http://_vscodecontentref_/3)
+└── app.py
 ```
