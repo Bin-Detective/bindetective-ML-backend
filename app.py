@@ -7,6 +7,9 @@ from config import Config
 import src.utils.model_utils as model_utils
 from src.handler import WastePredictionServicer, load_model_from_dir
 
+# Set the environment variable
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = Config.TF_ENABLE_ONEDNN_OPTS
+
 # Load the model
 load_model_from_dir()
 
