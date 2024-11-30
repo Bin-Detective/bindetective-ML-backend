@@ -1,4 +1,8 @@
 import os
+
+# Set the environment variable
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
 import logging
 import requests
 from fastapi import FastAPI, HTTPException
@@ -7,8 +11,6 @@ from config import Config
 import src.utils.model_utils as model_utils
 from src.handler import WastePredictionServicer, load_model_from_dir
 
-# Set the environment variable
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = Config.TF_ENABLE_ONEDNN_OPTS
 
 # Load the model
 load_model_from_dir()
@@ -54,5 +56,5 @@ async def predict(image_url: ImageURL):
 # Start the FastAPI server
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.getenv('PORT', '7976'))
+    port = int(os.getenv('PORT', '8809'))
     uvicorn.run(app, host='0.0.0.0', port=port)

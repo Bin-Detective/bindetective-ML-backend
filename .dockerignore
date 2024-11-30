@@ -29,3 +29,7 @@ _.log
 _.tmp
 _.bak
 _.swp
+
+
+#ignore model_dir
+/model_dir
