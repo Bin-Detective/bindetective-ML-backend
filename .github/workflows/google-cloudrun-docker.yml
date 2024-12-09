@@ -52,7 +52,7 @@ jobs:
 
       - name: 'Build and Push Container'
         run: |-
-          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/bin-detective-ml/bin-detective-ml:${{ env.VERSION }}"
+          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/bin-detective-grpc-service/bin-detective-ml:${{ env.VERSION }}"
           docker build --tag "${DOCKER_TAG}" .
           docker push "${DOCKER_TAG}"
 
@@ -62,7 +62,7 @@ jobs:
         with:
           service: '${{ env.SERVICE }}'
           region: 'asia-southeast2'
-          image: 'asia-southeast2-docker.pkg.dev/dicoding-submission-440805/bin-detective-ml/bin-detective-ml:${{ env.VERSION }}'
+          image: 'asia-southeast2-docker.pkg.dev/dicoding-submission-440805/bin-detective-grpc-service/bin-detective-ml:${{ env.VERSION }}'
           flags: >-
             --cpu=2
             --memory=2048Mi
