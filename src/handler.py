@@ -34,7 +34,15 @@ class WastePredictionServicer:
     def predict(self, image_bytes: bytes):
         try:
             # Load image from binary data
-            image = Image.open(io.BytesIO(image_bytes)).resize((224, 224))
+            image = Image.open(io.BytesIO(image_bytes))
+
+            # Convert RGBA or other modes to RGB if needed
+            if image.mode != 'RGB':
+                image = image.convert('RGB')
+
+            # Resize the image
+            image = image.resize((224, 224))
+
             image_array = np.expand_dims(np.array(image, dtype=np.uint8), axis=0)
 
             # Run the prediction
